@@ -8,4 +8,4 @@ resources:
 images:
 - name: goserver
   newName: carlosadrianosouza/gitopsfc
-  newTag: c2681c1f8efb437e8a50d91876f151593535bcf1
+  newTag: ea6aa9fb17bf087d9076d96fcc3d43b5242ab68c
