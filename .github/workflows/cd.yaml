@@ -45,5 +45,6 @@ jobs:
     - name: Push
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        #github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: "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"        
         repository: carlosadrianosouza/gitopsfc
