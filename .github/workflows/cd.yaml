@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build | Customize | Push
     runs-on: ubuntu-latest
 
     steps:
