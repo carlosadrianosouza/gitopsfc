@@ -5,7 +5,7 @@ Projeto referente curso FullCycle ARGOCD
 ######Criacao Token docker.io
 Token devera ser criado em: https://app.docker.com/ | Account Settings | Personal access tokens
 Token: dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0
-
+Este token sera usado 
 
 ##Criar repositorio
 
