@@ -1,3 +1,5 @@
+####Este aqui é a primeira parte do curso, realizando apenas build da imagem
+
 name: CDGitops
 
 on: 
