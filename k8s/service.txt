@@ -3,10 +3,8 @@ kind: Service
 metadata:
   name: goserver-service
 spec:
-  type: LoadBalancer
   selector:
     app: goserver
   ports:
-    - port: 80 # Default port for image
-      targetPort: 80
-      protocol: TCP
+  - port: 8080
+    targetPort: 8080
