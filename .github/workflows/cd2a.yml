@@ -26,7 +26,7 @@ jobs:
         with:
           repository: carlosadrianosouza/gitopsfc-manifests
           token: ${{ secrets.GITOPS_TOKEN }} # PAT com permissão de push
-          path: k8s-manifests
+          path: gitopsfc-manifests
 
       - name: Instalar Kustomize
         uses: imranismail/setup-kustomize@v1
@@ -35,7 +35,7 @@ jobs:
 
       - name: Atualizar image tag com Kustomize
         run: |
-          cd k8s-manifests/apps/gitopsfc/overlays/prd
+          cd gitopsfc-manifests/apps/gitopsfc/overlays/prd
           kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
       - name: Commit e Push para repositório de manifests
