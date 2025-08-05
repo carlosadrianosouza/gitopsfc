@@ -24,7 +24,6 @@ DOCKER_USERNAME
 DOCKER_PASSWORD > Token gerado no passo anterior
 
 
-
 #####Customize
 1 - Criar arquivo kustomization no diretorio dos arquivos yaml
 2 - kustomize edit set image goserver=adriano/gitopsfc:2302
