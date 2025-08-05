@@ -1,54 +1,49 @@
-####Este aqui é a primeira parte do curso, realizando apenas build da imagem |
-##Criando e configurando o repositorio
+name: CDGitOps
 
-name: CDGitops
-
-on: 
+on:
   push:
     branches: [main]
 
 jobs:
   build:
-    name: Build
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout código da aplicação
+        uses: actions/checkout@v2
 
-    - name: Build and push image to Dockerhub
-      uses: docker/build-push-action@v1.1.0
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
-        #repository: carlosadrianosouza/gitopsfc
-        #username: "carlosadrianosouza"
-        #password: "dckr_pat_tG0o0gljJgGk7HC15cb-_01-rio"        
-        tags: ${{ github.sha }}, latest
+      - name: Build and push image to Dockerhub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
+          tags: ${{ github.sha }}, latest
 
-    - name: Setup Kustomize
-      uses: imranismail/setup-kustomize@v1
-      with: 
-        kustomize-version: "3.6.1"
-    
-    - name: Update Kubernetes resources
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      run: |        
-        git clone https://github.com/carlosadrianosouza/gitopsfc-manifests.git
-        cd gitopsfc-manifests/apps/gitopsfc/prd
-        kustomize edit set image goserver=$DOCKER_USERNAME/gitopsfc:$GITHUB_SHA
-        #kubectl apply -k gitopsfc-manifests/apps/gitopsfc/overlays/prd
-    
-    - name: Commit
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -am "Bump docker version"
-    
-    - name: Push-v-1521
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}        
-        repository: carlosadrianosouza/gitopsfc
+      - name: Clonar repositório de manifests
+        uses: actions/checkout@v2
+        with:
+          repository: carlosadrianosouza/gitopsfc-manifests
+          token: ${{ secrets.GITOPS_TOKEN }} # PAT com permissão de push
+          path: k8s-manifests
+
+      - name: Instalar Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          kustomize-version: "3.6.1"
+
+      - name: Atualizar image tag com Kustomize
+        run: |
+          cd k8s-manifests/apps/gitopsfc/overlays/prd
+          kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
+
+      - name: Commit e Push para repositório de manifests
+        run: |
+          cd k8s-manifests
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Update image tag to ${{ github.sha }}"
+          git push
+
