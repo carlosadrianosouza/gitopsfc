@@ -12,6 +12,9 @@ Token devera ser criado em: https://app.docker.com/ | Account Settings | Persona
 Token: dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0
 	username: "carlosadrianosouza"
 	password: "dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0"
+    ##Password abaixo criado em 04/08/2025
+	password: "dckr_pat__ZDGVngtmGa11YcEQPt3O7MPuP8"
+	
 Este token sera usado 
 
 ##Criar repositorio
