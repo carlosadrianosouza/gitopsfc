@@ -24,9 +24,9 @@ jobs:
       - name: Clonar repositório de manifests
         uses: actions/checkout@v2
         with:
-          repository: carlosadrianosouza/gitopsfc-manifests
+          repository: carlosadrianosouza/k8s-manifests
           token: ${{ secrets.GITOPS_TOKEN }}
-          path: gitopsfc-manifests
+          path: k8s-manifests
 
       - name: Instalar Kustomize
         uses: imranismail/setup-kustomize@v1
@@ -35,12 +35,12 @@ jobs:
 
       - name: Atualizar image tag com Kustomize
         run: |
-          cd gitopsfc-manifests/apps/gitopsfc/overlays/prd
+          cd k8s-manifests/apps/minha-app/overlays/prd
           kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
       - name: Commit e Push para repositório de manifests
         run: |
-          cd gitopsfc-manifests
+          cd k8s-manifests
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
