@@ -13,9 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Update Kubernetes resources      
-      run: |
-        echo "MYUser: ${{ secrets.DOCKER_USERNAME }}"
+    - name: VARIABLES     
+      run: |        
+            export MYUSER=${{ secrets.DOCKER_USERNAME }}              
+            echo "Usuario: $MYUSER"
         
         
 
