@@ -36,14 +36,14 @@ jobs:
         with:
           repository: carlosadrianosouza/app-gitops-manifests
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: app-gitops-manifests
+          path: base
             
       - name: Instalar Kustomize
         uses: imranismail/setup-kustomize@v1
         with:
           kustomize-version: "3.6.1"
 
-          
+
       # - name: Atualizar image tag com Kustomize
       #   run: |
       #     cd k8s-manifests/apps/minha-app/overlays/prd
@@ -51,6 +51,7 @@ jobs:
 
       - name: Atualizar imagem com kustomize
         run: |
+          ls -ltro 
           cd app-gitops-manifests/base
           cd base
           kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
