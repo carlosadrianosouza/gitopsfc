@@ -23,46 +23,58 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
           tags: ${{ github.sha }}, latest
-
-      # - name: Clonar repositório de manifests
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: carlosadrianosouza/k8s-manifests
-      #     token: ${{ secrets.GITOPS_TOKEN }}
-      #     path: k8s-manifests
       
-      - name: Clonar o repositório de manifestos
-        uses: actions/checkout@v3
+      - name: Instalar Kustomize
+        uses: imranismail/setup-kustomize@v1
         with:
-          repository: carlosadrianosouza/app-gitops-manifests
+          kustomize-version: "3.6.1"      
+      ##########################################################################################
+      # - name: Clonar o repositório de manifestos
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: carlosadrianosouza/app-gitops-manifests
+      #     token: ${{ secrets.GITOPS_TOKEN }}
+      #     path: base
+      
+      # - name: Atualizar imagem com kustomize
+      #   run: |
+      #     ls -ltro           
+      #     pwd
+      #     cd app-gitops-manifests/base          
+      #     kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
+
+      # - name: Commit e Push para repositório de manifests
+      #   run: |
+      #     cd k8s
+      #     git config user.name "github-actions"
+      #     git config user.email "github-actions@github.com"
+      #     git add .
+      #     git commit -m "Update image tag to ${{ github.sha }}"
+      #     git push
+      ##########################################################################################
+      - name: Clonar repositório de manifests
+        uses: actions/checkout@v2
+        with:
+          repository: carlosadrianosouza/k8s-manifests
           token: ${{ secrets.GITOPS_TOKEN }}
-          path: base
-            
+          path: k8s-manifests
+
       - name: Instalar Kustomize
         uses: imranismail/setup-kustomize@v1
         with:
           kustomize-version: "3.6.1"
 
-
-      # - name: Atualizar image tag com Kustomize
-      #   run: |
-      #     cd k8s-manifests/apps/minha-app/overlays/prd
-      #     kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
-
-      - name: Atualizar imagem com kustomize
+      - name: Atualizar image tag com Kustomize
         run: |
-          ls -ltro           
-          pwd
-          cd app-gitops-manifests/base          
-          kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
+          cd k8s-manifests/apps/minha-app/overlays/prd
+          kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
+
 
       - name: Commit e Push para repositório de manifests
         run: |
-          cd k8s
+          cd k8s-manifests
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
           git commit -m "Update image tag to ${{ github.sha }}"
           git push
-      
-    
