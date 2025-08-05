@@ -5,5 +5,5 @@ resources:
 - service.yaml
 images:
 - name: goserver
-  newName: adriano/gitopsfc
-  newTag: "2302"
+  newName: carlosadrianosouza/gitopsfc
+  newTag: 30f2336566e282affc72a0c81bc1b1c19569c7ef
