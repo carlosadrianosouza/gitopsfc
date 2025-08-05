@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: carlosadrianosouza/gitopsfc-manifests
-          token: ${{ secrets.GITOPS_TOKEN }} # PAT com permissão de push
+          token: ${{ secrets.GITOPS_TOKEN }}
           path: gitopsfc-manifests
 
       - name: Instalar Kustomize
@@ -40,7 +40,7 @@ jobs:
 
       - name: Commit e Push para repositório de manifests
         run: |
-          cd k8s-manifests
+          cd gitopsfc-manifests
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
