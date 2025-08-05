@@ -1,3 +1,6 @@
+##Esse arquivo esta configurado para usar repositorios separados, falta validar
+##
+
 name: CDGitOps
 
 on:
@@ -38,7 +41,7 @@ jobs:
           cd k8s-manifests/apps/minha-app/overlays/prd
           kustomize edit set image gitopsfc=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
-          
+
       - name: Commit e Push para repositório de manifests
         run: |
           cd k8s-manifests
