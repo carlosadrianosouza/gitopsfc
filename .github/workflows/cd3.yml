@@ -51,8 +51,7 @@ jobs:
 
       - name: Atualizar imagem com kustomize
         run: |
-          ls -ltro 
-          cd app-gitops-manifests/base
+          ls -ltro           
           cd base
           kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
