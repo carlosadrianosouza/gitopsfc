@@ -1,7 +1,6 @@
 ####Este aqui é a primeira parte do curso, realizando apenas build da imagem |
 ##Criando e configurando o repositorio
 
-
 name: CDGitops
 
 on: 
