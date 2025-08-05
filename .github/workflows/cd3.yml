@@ -51,6 +51,7 @@ jobs:
       - name: Atualizar imagem no kustomize
         run: |
           cd k8s
+          cd app-gitops-manifests
           kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
 
