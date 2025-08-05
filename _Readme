@@ -1,13 +1,21 @@
-Projeto referente curso FullCycle ARGOCD
+#####Projeto referente curso FullCycle ARGOCD################################
 
+
+##Testar aplicacao GO
+Executar o GO
+go run main.go
 
 
 ######Criacao Token docker.io
+##Este token é necessario para a pipeline autenticar no DOCKER.IO e realizar upload da imagem
 Token devera ser criado em: https://app.docker.com/ | Account Settings | Personal access tokens
 Token: dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0
+	username: "carlosadrianosouza"
+	password: "dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0"
 Este token sera usado 
 
 ##Criar repositorio
+
 
 ##Definir variaveis
 No Repositorio definir as variaves abaixo(Repository > Settings > Secrets > Actions):
