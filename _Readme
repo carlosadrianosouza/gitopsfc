@@ -9,9 +9,8 @@ go run main.go
 ######Criacao Token docker.io
 ##Este token é necessario para a pipeline autenticar no DOCKER.IO e realizar upload da imagem
 Token devera ser criado em: https://app.docker.com/ | Account Settings | Personal access tokens
-Token: dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0
-	username: "carlosadrianosouza"
-	password: "dckr_pat_FKdsI7lYWcG1CdBMBQG4-arWcv0"
+Token: dckr_pat_tG0o0gljJgGk7HC15cb-_01-rio
+	username: "carlosadrianosouza"	
     ##Password abaixo criado em 04/08/2025
 	password: "dckr_pat_tG0o0gljJgGk7HC15cb-_01-rio"
 	
@@ -24,6 +23,12 @@ Este token sera usado
 No Repositorio definir as variaves abaixo(Repository > Settings > Secrets > Actions):
 DOCKER_USERNAME
 DOCKER_PASSWORD > Token gerado no passo anterior
+
+
+
+#####Customize
+1 - Criar arquivo kustomization no diretorio dos arquivos yaml
+2 - kustomize edit set image goserver=adriano/gitopsfc:2302
 
 
 
