@@ -16,9 +16,7 @@ jobs:
     - name: VARIABLES     
       run: |        
             export MYUSER=${{ secrets.DOCKER_USERNAME }}              
-            echo "Usuario: $MYUSER"
-        
-        
+            echo "Usuario: $MYUSER"        
 
     - name: Build and push image to Dockerhub
       uses: docker/build-push-action@v1.1.0
