@@ -45,7 +45,7 @@ jobs:
 
       - name: Commit e Push para repositório de manifests
         run: |
-          cd k8s
+          cd app-gitops-manifests
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
