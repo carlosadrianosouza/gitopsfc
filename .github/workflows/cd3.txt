@@ -40,7 +40,8 @@ jobs:
         run: |
           ls -ltro           
           pwd
-          cd app-gitops-manifests/base          
+          cd app-gitops-manifests/base
+          cd app-gitops-manifests/apps/goserver
           kustomize edit set image goserver=${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
 
       - name: Commit e Push para repositório de manifests
